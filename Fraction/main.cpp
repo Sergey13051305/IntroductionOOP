@@ -1,5 +1,6 @@
 #include <iostream>
 using namespace std;
+#define delimiter "\n-------------------------------------------------\n"
 class Fraction;
 Fraction operator*(Fraction left, Fraction right);
 
@@ -154,10 +155,13 @@ Fraction operator*(Fraction left, Fraction right)
 		left.get_denominator() * right.get_denominator()
 	).to_proper().reduce();
 }
-
 Fraction operator/(const Fraction& left, Fraction& right)
 {
 	return left * right.inverted();
+}
+Fraction operator+(Fraction left, Fraction right)
+{
+
 }
 bool operator==(Fraction left, Fraction right)
 {
@@ -210,7 +214,7 @@ std::ostream& operator << (std::ostream& os, const Fraction& obj)
 }
 
 //#define CONSTRUCTORS_CHECK
-//#define ARITHMETICAL_OPERATORS_CHECK
+#define ARITHMETICAL_OPERATORS_CHECK
 //#define COMPARISON_OPERATOR_CHECK
 void main()
 {
@@ -237,19 +241,26 @@ void main()
 #endif // CONSTRUCTORS_CHECK
 
 #ifdef ARITHMETICAL_OPERATORS_CHECK
-	Fraction A(2, 3, 4);
+	Fraction A(3, 1, 5);
 	A.print();
-
-	Fraction B(3, 16, 20);
+	cout << delimiter <<endl;
+	Fraction B(4, 2, 3);
 	B.print();
+	cout << delimiter <<endl;
+	Fraction E = A + B;
+	E.print();
 
 	/*Fraction C = A * B;
 	C.print();
+	cout << delimiter <<endl;
 	Fraction D = A / B;
-	D.print();*/
+	D.print();
+	cout << delimiter <<endl;*/
+	//cout << delimiter <<endl;
+	//A *= B;
+	//A.print();
+	//cout << delimiter <<endl;
 
-	A *= B;
-	A.print();
 #endif // ARITHMETICAL_OPERATORS_CHECK
 
 #ifdef COMPARISON_OPERATOR_CHECK
@@ -257,9 +268,8 @@ void main()
 	Fraction B(5, 10);
 	cout << (A <= B) << endl;
 #endif // COMPARISON_OPERATOR_CHECK
-
-	Fraction A(5, 10);
+	/*Fraction A(5, 10);
 	cout << A << endl;
 	A.reduce();
-	cout << A << endl; 
+	cout << A << endl; */
 }
