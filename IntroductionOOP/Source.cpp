@@ -72,6 +72,18 @@ public:
 		this->y = other.y;
 		return *this;
 	}
+	Point& operator-=(const Point& other)
+	{
+		this->x -= other.x;
+		this->y -= other.y;
+		return *this;
+	}
+	Point& operator/=(const Point& other)
+	{
+		this->x /= other.x;
+		this->y /= other.y;
+		return *this;
+	}
 	Point& operator++()
 	{
 		x++;
@@ -83,6 +95,19 @@ public:
 		Point old = *this; // сохраняем исходное значение объекта
 		x++;
 		y++;
+		return old;
+	}
+	Point& operator--()
+	{
+		x--;
+		y--;
+		return *this;
+	}
+	Point operator--(int)
+	{
+		Point old = *this; // сохраняем исходное значение объекта
+		x--;
+		y--;
 		return old;
 	}
 	//  Methods
@@ -134,6 +159,14 @@ Point operator+(const Point& left, const Point& right)
 			left.get_x() + right.get_x(),
 			left.get_y() + right.get_y()
 		);
+}
+Point operator-(const Point& left, const Point& right)
+{
+	return Point
+	(
+		left.get_x() - right.get_x(),
+		left.get_y() - right.get_y()
+	);
 }
 
 //Point A;
@@ -254,11 +287,22 @@ void main()
 	B.print();
 #endif
 	Point A(2, 3);
-	A.print();
-	Point B(7, 8);
-	B.print();
+	Point B(4, 5);
+	Point C(6, 7);
 
+	// Проверяем перегруженные операторы + , -
+	cout << "A + B = " << A + B << endl;
+	cout << "A - B = " << A - B << endl;
+
+	// Проверяем перегруженные операторы +=, -= , /=
 	A += B;
-	//A.print();
-	cout << A << endl;
+	cout << "A += B: " << A << endl;
+	A -= C;
+	cout << "A -= C: " << A << endl;
+	A /= B;
+	cout << "A /= B: " << A << endl;
+
+	// Проверяем перегруженные операторы ++ в префиксной и постфиксной формах
+	cout << "++A: " << ++A << endl;
+	cout << "A++: " << A++ << endl;
 }
